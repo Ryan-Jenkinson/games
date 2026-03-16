@@ -21,6 +21,22 @@ open <game>/index.html
 - All assets (CSS, JS, images) for a game should live inside that game's subfolder
 - No external dependencies or package managers — keep everything vanilla HTML/CSS/JS
 
-## Git
+## Git — automatic backup
 
-Every commit auto-pushes to `origin main` via a `post-commit` hook.
+A `post-commit` hook auto-pushes every commit to `origin main`, so nothing is ever lost locally.
+
+**After every change to any file, Claude must:**
+1. Stage the changed files (`git add <files>`)
+2. Commit with a clear message describing what changed and why
+3. The push happens automatically via the hook — no manual push needed
+
+Do this after each logical unit of work, not just at the end of a session. This ensures GitHub always reflects the latest state and provides a full history of every change made.
+
+## Memory
+
+Use the `.claude/` memory system to record:
+- What has been built in each game/project (features, known bugs, decisions made)
+- User preferences and feedback from the current project
+- Any context that would help a future Claude instance pick up where this one left off
+
+Update memory files whenever something significant is decided or completed.
